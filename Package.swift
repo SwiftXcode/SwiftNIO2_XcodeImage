@@ -9,19 +9,21 @@ let package = Package(
                  from: "1.0.0"),
         */
         .package(url: "https://github.com/apple/swift-nio.git", 
-                 from: "1.13.2"),
+                 from: "2.0.0"),
         .package(url: "https://github.com/apple/swift-nio-ssl.git", 
-                 from: "1.4.0"),
+                 from: "2.0.1"),
+        .package(url: "https://github.com/apple/swift-nio-http2.git",
+                 from: "1.0.1"),
         .package(url: "https://github.com/NozeIO/MicroExpress.git",
-                 "0.4.0"..<"0.5.0"),
+                 from: "0.5.0"),
         .package(url: "https://github.com/SwiftNIOExtras/swift-nio-redis.git",
-                 "0.9.0"..<"0.10.0"),
+                 from: "0.10.0"),
         .package(url: "https://github.com/SwiftNIOExtras/swift-nio-irc.git",
-                 "0.6.2"..<"0.7.0"),
+                 from: "0.7.0"),
         .package(url: "https://github.com/NozeIO/swift-nio-redis-client.git",
-                 "0.9.0"..<"0.10.0"),
+                 from: "0.10.0"),
         .package(url: "https://github.com/NozeIO/swift-nio-irc-client.git",
-                 "0.6.1"..<"0.7.0")
+                 from: "0.7.0")
     ],
     targets: [
         .target(name: "SwiftNIO_XcodeImage", 
