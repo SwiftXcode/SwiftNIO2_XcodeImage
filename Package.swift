@@ -2,7 +2,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "SwiftNIO_XcodeImage",
+    name: "SwiftNIO2_XcodeImage",
     dependencies: [
         /* Add your package dependencies in here
         .package(url: "https://github.com/AlwaysRightInstitute/cows.git",
@@ -26,7 +26,7 @@ let package = Package(
                  from: "0.7.0")
     ],
     targets: [
-        .target(name: "SwiftNIO_XcodeImage", 
+        .target(name: "SwiftNIO2_XcodeImage", 
                 dependencies: [ 
                     /* Add your target dependencies in here, e.g.: */
                     // "cows",

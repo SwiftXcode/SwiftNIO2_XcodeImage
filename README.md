@@ -5,7 +5,7 @@
 
 ![Swift5](https://img.shields.io/badge/swift-5-blue.svg)
 ![macOS](https://img.shields.io/badge/os-macOS-green.svg?style=flat)
-![Travis](https://travis-ci.org/SwiftXcode/SwiftNIO_XcodeImage.svg?branch=master)
+![Travis](https://travis-ci.org/SwiftXcode/SwiftNIO2_XcodeImage.svg?branch=master)
 [![homebrew](https://img.shields.io/homebrew/v/cake.svg)](https://github.com/SwiftXcode/homebrew-swiftxcode)
 
 SwiftXcode image for
