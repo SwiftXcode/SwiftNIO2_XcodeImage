@@ -32,12 +32,12 @@ let package = Package(
                     // "cows",
                     "NIO",
                     "NIOHTTP1",
-                    "NIOOpenSSL",
+                    "NIOSSL",
+                    "NIOHTTP2",
                     "MicroExpress",
                     "NIORedis",
                     "Redis",
-                    "NIOIRC",
-                    "NIO"
+                    "NIOIRC"
                 ])
     ]
 )

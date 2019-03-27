@@ -528,6 +528,42 @@ server.listenAndWait()</string>
           </array>
         </dict>
       </dict>
+      
+      <dict>
+        <key>Identifier</key>   <string>zzSwiftNIOHTTP2</string>
+        <key>Name</key>         <string>Include the SwiftNIO HTTP/2 module.</string>
+        <key>Description</key>
+        <string>HTTP/2.x support for Swift NIO.</string>
+        
+        <key>SortOrder</key>    <integer>21</integer>
+        <key>Type</key>         <string>checkbox</string>
+        <key>Default</key>      <string>false</string>
+        <key>NotPersisted</key> <true/>
+        
+        <key>Units</key>
+        <dict>
+          <key>true</key>
+          <array>
+            <dict>
+              <key>Nodes</key>
+              <array>
+                <string>Package.swift:spmpackagedecl:deps:SwiftNIOSSL(url: "https://github.com/apple/swift-nio-http2.git", 
+                 from: "2.0.0")</string>
+                <string>Package.swift:spmpackagedecl:targets:default:NIOHTTP2</string>
+                <string>Sources/___PACKAGENAME___/main.swift:imports:import:NIOHTTP2</string>
+              </array>
+              
+              <!-- Add a nice main boilerplate w/ HTTP/2 support
+              <key>Definitions</key>
+              <dict>
+                <key>Sources/___PACKAGENAME___/main.swift:body:SwiftNIOMain</key>
+                <string></string>
+              </dict>
+                -->
+            </dict>
+          </array>
+        </dict>
+      </dict>
 
       
       <dict>
