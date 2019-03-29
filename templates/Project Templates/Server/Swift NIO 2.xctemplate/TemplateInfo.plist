@@ -110,7 +110,7 @@ final class Handler : ChannelInboundHandler {
     /// This method is called when the connection receives data. The data is
     /// passed in using the opaque `NIOAny` object, and needs to be unwrapped
     /// before it can be used.
-    func channelRead(ctx: ChannelHandlerContext, data: NIOAny) {
+    func channelRead(context: ChannelHandlerContext, data: NIOAny) {
         let bb = unwrapInboundIn(data)
       
         // This is where you would add your parsing / content handling code
@@ -124,35 +124,35 @@ final class Handler : ChannelInboundHandler {
       
         // Echo back received data (Note: write only buffers, `flush` must be 
         // called to actually send it to the socket).
-        ctx.write(data, promise: nil)
+        context.write(data, promise: nil)
     }
   
     /// This method is called when all incoming data has been processed. 
     /// Depending on the protocol, this is a good time to flush all writes.
     ///
     /// Important: Only if you `flush`, data actually gets sent!
-    func channelReadComplete(ctx: ChannelHandlerContext) {
-        ctx.flush()
+    func channelReadComplete(context: ChannelHandlerContext) {
+        context.flush()
     }
   
     /// This method is called if the socket is ready to be used. This can be 
     /// used to setup processing state and is called before `channelRead` gets
     /// called.
-    func channelActive(ctx: ChannelHandlerContext) {
+    func channelActive(context: ChannelHandlerContext) {
         print("Channel ready, client address:",
-              ctx.channel.remoteAddress?.description ?? "-")
+              context.channel.remoteAddress?.description ?? "-")
     }
 
     /// This method is called if the socket is closed in a clean way, i.e. the
     /// client disconnected.
-    func channelInactive(ctx: ChannelHandlerContext) {
+    func channelInactive(context: ChannelHandlerContext) {
         print("Channel closed.", ObjectIdentifier(self))
     }
   
     /// Called if an error happens. We just close the socket here.
-    func errorCaught(ctx: ChannelHandlerContext, error: Error) {
+    func errorCaught(context: ChannelHandlerContext, error: Error) {
         print("ERROR:", error)
-        ctx.close(promise: nil)
+        context.close(promise: nil)
     }
 }
 
@@ -195,7 +195,7 @@ final class Server {
         
             if let host = configuration.host {
                 address = try SocketAddress
-                  .newAddressResolving(host: host, port: configuration.port)
+                  .makeAddressResolvingHost(host, port: configuration.port)
             }
             else {
                 var addr = sockaddr_in()
@@ -237,8 +237,8 @@ final class Server {
             // Set the handlers that are applied to the accepted Channels
             .childChannelInitializer { channel in
                 channel.pipeline
-                    .add(name: "___VARIABLE_productName:RFC1034Identifier___",
-                         handler: Handler())
+                    .addHandler(Handler(),
+                         name: "___VARIABLE_productName:RFC1034Identifier___")
             }
         
             // Enable TCP_NODELAY and SO_REUSEADDR for the accepted Channels
@@ -315,7 +315,7 @@ final class Handler : ChannelInboundHandler {
     /// This method is called when the HTTP parser receives data. The data is
     /// passed in using the opaque `NIOAny` object, and needs to be unwrapped
     /// before it can be used.
-    func channelRead(ctx: ChannelHandlerContext, data: NIOAny) {
+    func channelRead(context: ChannelHandlerContext, data: NIOAny) {
         let requestPart = unwrapInboundIn(data)
       
         // This is where you would add your request handling code
@@ -331,12 +331,12 @@ final class Handler : ChannelInboundHandler {
             // away. First the head is written, then some body.
             let responseHead =
                     HTTPResponseHead(version: requestHead.version, status: .ok)
-            ctx.write(wrapOutboundOut(.head(responseHead)), promise: nil)
+            context.write(wrapOutboundOut(.head(responseHead)), promise: nil)
             
-            var bodyData = ctx.channel.allocator.buffer(capacity: 64)
-            bodyData.write(staticString: "Hello World!")
-            ctx.write(wrapOutboundOut(.body(.byteBuffer(bodyData))),
-                      promise: nil)
+            var bodyData = context.channel.allocator.buffer(capacity: 64)
+            bodyData.writeStaticString("Hello World!")
+            context.write(wrapOutboundOut(.body(.byteBuffer(bodyData))),
+                          promise: nil)
           
         case .body(let bb):
             // Incoming request body content can be processed here.
@@ -351,7 +351,7 @@ final class Handler : ChannelInboundHandler {
             }
           
         case .end:
-            ctx.write(wrapOutboundOut(.end(nil)), promise: nil)
+            context.write(wrapOutboundOut(.end(nil)), promise: nil)
         }
     }
   
@@ -359,28 +359,28 @@ final class Handler : ChannelInboundHandler {
     /// Depending on the protocol, this is a good time to flush all writes.
     ///
     /// Important: Only if you `flush`, data actually gets sent!
-    func channelReadComplete(ctx: ChannelHandlerContext) {
-        ctx.flush()
+    func channelReadComplete(context: ChannelHandlerContext) {
+        context.flush()
     }
   
     /// This method is called if the socket is ready to be used. This can be
     /// used to setup processing state and is called before any read is passed
     /// on.
-    func channelActive(ctx: ChannelHandlerContext) {
+    func channelActive(context: ChannelHandlerContext) {
         print("Channel ready, client address:",
-              ctx.channel.remoteAddress?.description ?? "-")
+              context.channel.remoteAddress?.description ?? "-")
     }
 
     /// This method is called if the socket is closed in a clean way, i.e. the
     /// HTTP client disconnected.
-    func channelInactive(ctx: ChannelHandlerContext) {
+    func channelInactive(context: ChannelHandlerContext) {
         print("Channel closed.", ObjectIdentifier(self))
     }
   
     /// Called if an error happens. We just close the socket here.
-    func errorCaught(ctx: ChannelHandlerContext, error: Error) {
+    func errorCaught(context: ChannelHandlerContext, error: Error) {
         print("ERROR:", error)
-        ctx.close(promise: nil)
+        context.close(promise: nil)
     }
 }
 
