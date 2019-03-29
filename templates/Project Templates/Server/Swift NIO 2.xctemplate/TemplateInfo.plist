@@ -514,8 +514,8 @@ server.listenAndWait()</string>
               <array>
                 <string>Package.swift:spmpackagedecl:deps:SwiftNIOSSL(url: "https://github.com/apple/swift-nio-ssl.git", 
                  from: "2.0.0")</string>
-                <string>Package.swift:spmpackagedecl:targets:default:NIOOpenSSL</string>
-                <string>Sources/___PACKAGENAME___/main.swift:imports:import:NIOOpenSSL</string>
+                <string>Package.swift:spmpackagedecl:targets:default:NIOSSL</string>
+                <string>Sources/___PACKAGENAME___/main.swift:imports:import:NIOSSL</string>
               </array>
               
               <!-- Add a nice main boilerplate w/ SSL support
