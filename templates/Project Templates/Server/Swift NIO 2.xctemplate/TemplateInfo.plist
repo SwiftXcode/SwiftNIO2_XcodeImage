@@ -465,10 +465,10 @@ final class Server {
             .childChannelInitializer { channel in
                 channel.pipeline
                     .configureHTTPServerPipeline(withErrorHandling: true)
-                    .then {
+                    .flatMap {
                         channel.pipeline
-                            .add(name: "___VARIABLE_productName:RFC1034Identifier___",
-                                 handler: Handler())
+                            .addHandler(Handler(),
+                                        name: "___VARIABLE_productName:RFC1034Identifier___")
                     }
             }
           
