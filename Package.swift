@@ -15,7 +15,7 @@ let package = Package(
         .package(url: "https://github.com/apple/swift-nio-http2.git",
                  from: "1.0.1"),
         .package(url: "https://github.com/NozeIO/MicroExpress.git",
-                 from: "0.5.0"),
+                 from: "0.5.1"),
         .package(url: "https://github.com/SwiftNIOExtras/swift-nio-redis.git",
                  from: "0.10.0"),
         .package(url: "https://github.com/SwiftNIOExtras/swift-nio-irc.git",
