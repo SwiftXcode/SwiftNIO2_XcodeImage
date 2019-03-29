@@ -195,7 +195,7 @@ final class Server {
         
             if let host = configuration.host {
                 address = try SocketAddress
-                  .makeAddressResolvingHost(host, port: configuration.port)
+                    .makeAddressResolvingHost(host, port: configuration.port)
             }
             else {
                 var addr = sockaddr_in()
@@ -423,7 +423,7 @@ final class Server {
           
             if let host = configuration.host {
                 address = try SocketAddress
-                  .newAddressResolving(host: host, port: configuration.port)
+                    .makeAddressResolvingHost(host, port: configuration.port)
             }
             else {
                 var addr = sockaddr_in()
@@ -441,7 +441,8 @@ final class Server {
             }
         }
         catch let error as NIO.IOError {
-            print("ERROR: failed to start server, errno:", error.errnoCode, "\n",
+            print("ERROR: failed to start server, errno:", 
+                  error.errnoCode, "\n",
                   error.localizedDescription)
         }
         catch {
